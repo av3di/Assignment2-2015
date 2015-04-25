@@ -5,15 +5,17 @@
         return item.counts.media;
       });
       
-      yCounts.unshift('Media Count');
+      yCounts.unshift('Posts');
 
       var chart = c3.generate({
         bindto: '#chart',
         data: {
           columns: [
             yCounts 
-          ]
+          ],
+          type: 'bar'
         }
       });
     });
 })();
+
