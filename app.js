@@ -140,6 +140,7 @@ passport.use(new FacebookStrategy({
       } else {
         //update user here
         user.ig_access_token = accessToken;
+        Facebook.setAccessToken(accessToken);
         user.save();
         process.nextTick(function () {
           // To keep the example simple, the user's Instagram profile is returned to
@@ -271,8 +272,8 @@ app.get('/igMediaCounts', ensureAuthenticatedInstagram, function(req, res){
 });
 
 app.get('/facefeed', function(req, res){
-  console.log("Searching for : " + req.user.displayName);
-  var query  = models.User.where({ name: req.user.displayName });
+  console.log("Searching for : " + req.user.ig_id);
+  var query  = models.User.where({ ig_id: req.user.ig_id });
   query.findOne(function (err, user) 
   {
     if (err) return handleError(err);
@@ -280,26 +281,18 @@ app.get('/facefeed', function(req, res){
     {
       // doc may be null if no document matched
       console.log("user is " + user);
-      Facebook.setAccessToken(user.access_token);
-      Facebook.get("/me/photos", function(err, response) 
+     //Facebook.setAccessToken(user.ig_access_token);
+      Facebook.get("/me/" , function(err, response) 
       {
-        console.log("response" + response);
+        for( key in response)
+        {
+            console.log("key " + key);
+        }
         if(response && !response.error)
         {
           console.log("hello");
-          //Map will iterate through the returned data obj
-          //console.log("Data: " + response.data);
-          var imageArr = response.data.map(function(item) {
-            //create temporary json object
-            console.log("item " + item);
-            tempJSON = {};
-            tempJSON.url = item.icon;
-            //insert json object into image array
-            return tempJSON;
-
-          });
         }
-        res.render('facefeed', {user: req.user, photos: imageArr, myurl: response.data.picture});
+        res.render('facefeed', {user: response});
       }); 
     }
   });
