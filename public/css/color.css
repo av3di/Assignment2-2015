@@ -1,0 +1,332 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900);
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+/********** MIXIN START **********/
+
+@socbtn-def-size: 70px;
+@socbtn-def-margin: 22px;
+@socbtn-def-shadow: 10px;
+@socbtn-font: 'entypo', sans-serif;
+@socbtn-font-color: #FFF;
+.social-button (@color; @icon; @size: @socbtn-def-size; @margin: @socbtn-def-margin; @shadow: @socbtn-def-shadow; @font: @socbtn-font; @text-color: @socbtn-font-color) {
+  @color-light: lighten(@color, 10%);
+  @color-fade: fade(@color, 80%);
+  @color-dim: darken(@color, 5%);
+  @color-dark: darken(@color, 10%);
+  @color-dark-dark: darken(@color, 30%);
+
+  
+  
+  
+  &:active, &:checked {
+    background-color: @color-dim;
+    
+    -webkit-box-shadow: 0 0 0 @shadow fade(@color-dim, 50%);
+    -moz-box-shadow: 0 0 0 @shadow fade(@color-dim, 50%);
+    box-shadow: 0 0 0 @shadow/1.2 fade(@color-dim, 50%);
+    
+    -webkit-box-shadow: 
+      0 0 0 @shadow fade(@color-dim, 50%),
+      inset 0 0 0 0 @color-dark;
+    -moz-box-shadow: 
+      0 0 0 @shadow fade(@color-dim, 50%),
+      inset 0 0 0 0 @color-dark;
+    box-shadow: 
+      0 0 0 @shadow fade(@color-dim, 50%),
+      inset 0 0 10px @color-dark-dark;
+    
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -ms-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+    
+    &:before {
+      color: fade(@text-color, 80%);
+      
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1);
+      -ms-transform: scale(1);
+      -o-transform: scale(1);
+      transform: scale(1);
+      
+      -webkit-transition: all 0.1s ease;
+      -moz-transition: all 0.1s ease;
+      -ms-transition: all 0.1s ease;
+      -o-transition: all 0.1s ease;
+      transition: all 0.1s ease;
+    }
+  }
+}
+
+
+
+
+@social-color-facebook: #3b5998;
+.facebook-button(@size: @socbtn-def-size; @margin: @socbtn-def-margin; @shadow: @socbtn-def-shadow) {
+  .social-button(@social-color-facebook; "\f30c"; @size; @margin);
+}
+
+@social-color-instagram: #3f729b;
+.instagram-button(@size: @socbtn-def-size; @margin: @socbtn-def-margin; @shadow: @socbtn-def-shadow) {
+  .social-button(@social-color-instagram; "\f32d"; @size; @margin);
+}
+
+
+
+
+/********** MIXIN END **********/
+
+
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+#facebook {
+  .facebook-button();
+}
+#instagram{
+  .instagram-button();
+}
+
+
+.pen-container {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 50px 30px;
+  text-align: center;
+  background-color: white;
+  
+ 
+  
+  &:before, &:after {
+    content: " ";
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    
+    background-color: #F5F7FA;
+  }
+  &:before {
+    top: 0px;
+    -webkit-box-shadow: 0 14px 14px -12px #AAB2BD;
+    -moz-box-shadow: 0 14px 14px -12px #AAB2BD;
+    box-shadow: 0 14px 14px -12px #AAB2BD;
+  }
+  &:after {
+    bottom: 0px;
+    -webkit-box-shadow: 0 -14px 14px -12px #AAB2BD;
+    -moz-box-shadow: 0 -14px 14px -12px #AAB2BD;
+    box-shadow: 0 -14px 14px -12px #AAB2BD;
+  }
+}
+
+h1 {
+  font-weight: 200;
+  font-size: 3em;
+  text-align: center;
+  
+  color: #656D78;
+  text-shadow: 0 1px #FFF;
+  
+  margin: 1em 0;
+}
+
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+.social {
+  outline: 0 none;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  padding: 0px;
+  margin-right: .5em;
+  color: #FFF;
+  border: 0 none;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.social:before {
+  color: #FFF;
+  font-family: 'entypo', sans-serif;
+  font-size: 2em;
+  line-height: 80px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.social:hover {
+  opacity: .7;
+}
+
+#facebook {
+  background-color: #3b5998;
+  -webkit-box-shadow: 0 0 0 20px rgba(59, 89, 152, 0), inset 0 0 5px #344E86, 0 1px 1px 1px rgba(255, 255, 255, 0.4);
+  -moz-box-shadow: 0 0 0 20px rgba(59, 89, 152, 0), inset 0 0 5px #344e86, 0 1px 1px 1px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 20px rgba(59, 89, 152, 0), inset 0 0 5px #344E86, 0 1px 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+#facebook:before {
+  content: "\f30c";
+  text-shadow: 0 0 10px #2D4373;
+}
+
+
+#instagran {
+  background-color: #517fa4;
+  -webkit-box-shadow: 0 0 0 20px rgba(63, 114, 155, 0), inset 0 0 5px #386589, 0 1px 1px 1px rgba(255, 255, 255, 0.4);
+  -moz-box-shadow: 0 0 0 20px rgba(63, 114, 155, 0), inset 0 0 5px #386589, 0 1px 1px 1px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 20px rgba(63, 114, 155, 0), inset 0 0 5px #386589, 0 1px 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+#instagran:before {
+  content: "\f32d";
+  text-shadow: 0 0 10px #305777;
+}
+
+
+
+@import url(http://fonts.googleapis.com/css?family=Pacifico);
+body {
+  padding: 0 100px 100px;
+  background-color: white !important;
+}
+
+h1#header {
+  text-align: center;
+  padding: 50px;
+  font-size: 62px;
+  font-family: "Pacifico";
+  text-shadow: 0 2px 2px #3c77b3;
+}
+
+.article-wrapper {
+  -moz-transition: width 0.4s;
+  -o-transition: width 0.4s;
+  -webkit-transition: width 0.4s;
+  transition: width 0.4s;
+}
+
+article {
+  position: relative;
+  padding-left: 180px;
+  padding-right: 75px;
+  height: 150px;
+  margin-bottom: 30px;
+  background-color: #FFF;
+  -moz-border-radius: 150px;
+  -webkit-border-radius: 150px;
+  border-radius: 150px;
+  cursor: pointer;
+}
+article .img-wrapper {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  -moz-border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  background-color: #CDE;
+  padding: 10px;
+  z-index: 1000;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+article .img-wrapper img {
+  -moz-border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  width: 150px;
+}
+article h1 {
+  height: 75px;
+  line-height: 75px;
+  font-size: 24px;
+  border-bottom: 2px solid #CDE;
+  color: #428bca;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+article p {
+  color: #888;
+}
+
+article:hover .img-wrapper {
+  padding: 5px;
+  -moz-transform: rotate(5deg);
+  -ms-transform: rotate(5deg);
+  -webkit-transform: rotate(5deg);
+  transform: rotate(5deg);
+}
+article:hover .img-wrapper img {
+  width: 160px;
+}
+article:hover a {
+  opacity: 1;
+}
+
+.bloc article {
+  padding: 10px;
+  height: 225px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  margin-top: 75px;
+}
+.bloc article .img-wrapper {
+  position: relative;
+  top: -85px;
+  width: 170px;
+  left: inherit;
+  margin: auto;
+  margin-bottom: -100px;
+}
+.bloc article h1 {
+  font-size: 14px;
+  height: 37.5px;
+  line-height: 37.5px;
+}
+.bloc article p {
+  font-size: 12px;
+}
+.bloc article a {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  line-height: 255px;
+}
