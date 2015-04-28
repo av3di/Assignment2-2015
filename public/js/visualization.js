@@ -26,12 +26,9 @@ var svg = d3.select("body").append("svg")
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-console.log("before sort");
-
 //get json object which contains media counts
 d3.json('/igMediaCounts', function(error, data) {
   //set domain of x to be all the usernames contained in the data
-  data.users.sort(function(a, b){ return a.counts.media - b.counts.media; });
   scaleX.domain(data.users.map(function(d) { return d.username; }));
   //set domain of y to be from 0 to the maximum media count returned
   scaleY.domain([0, d3.max(data.users, function(d) { return d.counts.media; })]);
@@ -69,4 +66,46 @@ d3.json('/igMediaCounts', function(error, data) {
     .attr("width", scaleX.rangeBand())
     .attr("y", function(d) { return scaleY(d.counts.media); })
     .attr("height", function(d) { return height - scaleY(d.counts.media); });
+
+
+
+
+
+d3.select("input").on("change", change);
+
+  var sortTimeout = setTimeout(function() {
+    d3.select("input").property("checked", true).each(change);
+  }, 2000);
+
+  function change() {
+    clearTimeout(sortTimeout);
+
+    // Copy-on-write since tweens are evaluated after a delay.
+    var x0 = scaleX.domain(data.users.sort(this.checked
+        ? function(a, b) { return a.counts.media - b.counts.media; }
+        : function(a, b) { return d3.ascending(a.username, b.username); })
+        .map(function(d) { return d.username; }))
+        .copy();
+
+    svg.selectAll(".bar")
+        .sort(function(a, b) { return x0(a.username) - x0(b.username); });
+
+    var transition = svg.transition().duration(750),
+        delay = function(d, i) { return i * 50; };
+
+    transition.selectAll(".bar")
+        .delay(delay)
+        .attr("x", function(d) { return x0(d.username); });
+
+    transition.select(".x.axis")
+        .call(xAxis)
+      .selectAll("g")
+        .delay(delay);
+  }
+
+
+
+
+
+
 });
