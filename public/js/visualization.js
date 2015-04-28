@@ -26,9 +26,12 @@ var svg = d3.select("body").append("svg")
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+console.log("before sort");
+
 //get json object which contains media counts
 d3.json('/igMediaCounts', function(error, data) {
   //set domain of x to be all the usernames contained in the data
+  data.users.sort(function(a, b){ return a.counts.media - b.counts.media; });
   scaleX.domain(data.users.map(function(d) { return d.username; }));
   //set domain of y to be from 0 to the maximum media count returned
   scaleY.domain([0, d3.max(data.users, function(d) { return d.counts.media; })]);
