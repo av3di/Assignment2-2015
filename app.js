@@ -309,17 +309,22 @@ app.get('/facefeed', function(req, res){
       // doc may be null if no document matched
       console.log("user is " + user);
      //Facebook.setAccessToken(user.ig_access_token);
-      Facebook.get("/me/" , function(err, response) 
+      Facebook.get("/me/likes" , function(err, response) 
       {
-        for( key in response)
+
+        console.log("Response " + response.data[0].name);
+        var infoarr = response.data.map(function(item)
         {
-            console.log("key " + key);
-        }
+          var tempJSON = {};
+          tempJSON.name = item.name;
+          return tempJSON;
+        });
+        
         if(response && !response.error)
         {
           console.log("hello");
         }
-        res.render('facefeed', {user: response});
+        res.render('facefeed', {likes: infoarr});
       }); 
     }
   });

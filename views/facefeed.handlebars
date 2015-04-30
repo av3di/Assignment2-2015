@@ -1,13 +1,4 @@
 hello account
-<p>ID: {{user.id}}</p>
-<p>Username: {{user.name}}</p>
-<p>Name: {{user.displayName}}</p>
-<p>First Name: {{user.first_name}}</p>
-<p>Last Name: {{user.last_name}}</p>
-<p>Link: {{user.link}}</p>
-<p>Gender: {{user.gender}}</p>
-<p>Locale: {{user.locale}}</p>
-<p>Timezone: {{user.timezone}}</p>
-<p>Updated Time: {{user.updated_time}}</p>
-<p>Verified: {{user.verified}}</p>
-<img src="{{myurl}}">
+{{#each likes}}
+<p>{{name}}</p>
+{{/each}}
