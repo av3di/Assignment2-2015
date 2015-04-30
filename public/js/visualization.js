@@ -26,6 +26,11 @@ var svg = d3.select("body").append("svg")
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+/*
+var tip = d3.tip().attr('class', 'd3.tip').offset([-10, 0]).html(function() {
+  return "<strong>Media Count:</strong> <span style='color:red'>" + d.counts.media + "</span>";
+});*/
+
 //get json object which contains media counts
 d3.json('/igMediaCounts', function(error, data) {
   //set domain of x to be all the usernames contained in the data
@@ -97,12 +102,12 @@ d3.select("input").on("change", change);
         .delay(delay)
         .attr("x", function(d) { return x0(d.username); });
 
-    transition.select(".x.axis")
+   transition.select(".x.axis")
         .call(xAxis)
-      .selectAll("g")
+    /*  .selectAll("g")
           .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")") //move x-axis to the bottom
-    .call(xAxis)
+    .call(xAxis)*/
     .selectAll("text")  
     .style("text-anchor", "end")
     .attr("dx", "-.8em")
