@@ -231,6 +231,33 @@ app.get('/igphotos', ensureAuthenticatedInstagram, function(req, res){
   });
 });
 
+app.get('/igrecent', ensureAuthenticatedInstagram, function(req, res){
+  var query  = models.User.where({ ig_id: req.user.ig_id });
+  query.findOne(function (err, user) {
+    if (err) return err;
+    if (user) {
+      // doc may be null if no document matched
+      Instagram.users.recent({
+        user_id: user.ig_id,
+        access_token: user.ig_access_token,
+        complete: function(data) {
+          console.log(data);
+          //Map will iterate through the returned data obj
+          var imageArr = data.map(function(item) {
+            //create temporary json object
+            tempJSON = {};
+            tempJSON.url = item.user.profile_picture;
+            //insert json object into image array
+            return tempJSON;
+          });
+          res.render('photos', {photos: imageArr});
+        }
+      }); 
+    }
+  });
+});
+
+
 app.get('/igMediaCounts', ensureAuthenticatedInstagram, function(req, res){
   var query  = models.User.where({ ig_id: req.user.ig_id });
   query.findOne(function (err, user) {

@@ -100,6 +100,13 @@ d3.select("input").on("change", change);
     transition.select(".x.axis")
         .call(xAxis)
       .selectAll("g")
+          .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")") //move x-axis to the bottom
+    .call(xAxis)
+    .selectAll("text")  
+    .style("text-anchor", "end")
+    .attr("dx", "-.8em")
+    .attr("dy", ".15em")
         .delay(delay);
   }
 
