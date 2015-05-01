@@ -28,15 +28,15 @@ var svg = d3.select("body").append("svg")
 
 
   var tip = d3.tip().attr('class', 'd3.tip').offset([-10, 0]).html(function(d) {
-  return "<strong>Category:</strong> <span style='color:red'>" + d.category + "</span>";
+  return "<strong>Likes:</strong> <span style='color:red'>" + d.liked_count + "</span><br><strong>Post:</strong> <span style='color:red'>" + d.story + "</span>";
 });
 
 //get json object which contains media counts
 d3.json('/facefeed', function(error, data) {
   //set domain of x to be all the usernames contained in the data
-  scaleX.domain(data.likes.map(function(d) { return d.name; }));
+  scaleX.domain(data.likes.map(function(d) { return d.id; }));
   //set domain of y to be from 0 to the maximum media count returned
-  scaleY.domain([0, d3.max(data.likes, function(d) { return 5; })]);
+  scaleY.domain([0, d3.max(data.likes, function(d) { return d.liked_count; })]);
 
 
 svg.call(tip);
@@ -69,10 +69,10 @@ svg.call(tip);
     .data(data.likes)
     .enter().append("rect")
     .attr("class", "bar")
-    .attr("x", function(d) { return scaleX(d.name); })
+    .attr("x", function(d) { return scaleX(d.id); })
     .attr("width", scaleX.rangeBand())
-    .attr("y", function(d) { return scaleY(5); })
-    .attr("height", function(d) { return height - scaleY(5); }).on('mouseover', tip.show)
+    .attr("y", function(d) { return scaleY(d.liked_count); })
+    .attr("height", function(d) { return height - scaleY(d.liked_count); }).on('mouseover', tip.show)
   .on('mouseout', tip.hide);
 
 
@@ -90,20 +90,20 @@ d3.select("input").on("change", change);
 
     // Copy-on-write since tweens are evaluated after a delay.
     var x0 = scaleX.domain(data.likes.sort(this.checked
-        ? function(a, b) { return d3.ascending(a.name, b.name); }
-        : function(a, b) { return d3.descending(a.name, b.name); })
-        .map(function(d) { return d.name; }))
+        ? function(a, b) { return a.liked_count - b.liked_count; }
+        : function(a, b) { return a.id - b.id; })
+        .map(function(d) { return d.id; }))
         .copy();
 
-    svg.selectAll(".bar")
-        .sort(function(a, b) { return x0(a.name) - x0(b.name); });
+   svg.selectAll(".bar")
+        .sort(function(a, b) { return x0(a.id) - x0(b.id); });
 
     var transition = svg.transition().duration(750),
         delay = function(d, i) { return i * 50; };
 
     transition.selectAll(".bar")
         .delay(delay)
-        .attr("x", function(d) { return x0(d.name); });
+       .attr("x", function(d) { return x0(d.id); });
 
    transition.select(".x.axis")
     .call(xAxis)

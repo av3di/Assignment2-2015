@@ -313,15 +313,21 @@ app.get('/facefeed', function(req, res){
       // doc may be null if no document matched
       console.log("user is " + user);
      //Facebook.setAccessToken(user.ig_access_token);
-      Facebook.get("/me/likes" , function(err, response) 
+      Facebook.get("/me/posts" , function(err, response) 
       {
 
        // console.log("Response " + response.data[0].name);
+       var theid = 0;
         var infoarr = response.data.map(function(item)
         {
           var tempJSON = {};
-          tempJSON.name = item.name;
-          tempJSON.category = item.category;
+          tempJSON.id = theid;
+          tempJSON.story = item.story;
+          if(item.likes !== undefined)
+            tempJSON.liked_count = item.likes.data.length;
+          else
+            tempJSON.liked_count = 0;
+          theid = theid + 1;
           return tempJSON;
         });
         

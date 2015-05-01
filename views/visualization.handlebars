@@ -1,6 +1,30 @@
 <h1> Number of Posts of Your Instagram Followers </h1>
 <div id="chart"></div>
 
+<div id="loading"></div>
+
+<script> 
+function onReady(callback) {
+    var intervalID = window.setInterval(checkReady,20);
+
+    function checkReady() {
+        if (document.getElementsByClassName('bar')[0] !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+        }
+    }
+}
+
+function show(id, value) {
+    document.getElementById(id).style.display = value ? 'block' : 'none';
+    debugger
+}
+
+onReady(function () { 
+    show('chart', true);
+    show('loading', false);
+});</script>
+
 <label style="width:100%; padding: 20px; text-align: center; font-weight:bold; font-size: 24px; color:#4682B4;"><input type="checkbox"> Sort values</label>
   <script src="d3-tip-master/index.js"></script>
 <script src="js/visualization.js"></script>

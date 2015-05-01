@@ -1,6 +1,31 @@
 
 <h1>Are the Popular Kids Following You?</h1>
-<h2>Number of Followers of Who You Follow using C3JS </h2>
+<h2 style="text-align:center;">Number of Followers of Who You Follow using C3JS </h2>
 <div id="chart"></div>
+
+
+<div id="loading"></div>
+
+<script> 
+function onReady(callback) {
+    var intervalID = window.setInterval(checkReady,30);
+
+    function checkReady() {
+        if (document.getElementById('chart') !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+        }
+    }
+}
+
+function show(id, value) {
+    document.getElementById(id).style.display = value ? 'block' : 'none';
+    debugger
+}
+
+onReady(function () { 
+    show('chart', true);
+    show('loading', false);
+});</script>
 
 <script src="js/c3visualization.js"></script>
