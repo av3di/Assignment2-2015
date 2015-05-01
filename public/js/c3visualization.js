@@ -2,10 +2,10 @@
   $.getJSON( '/igMediaCounts')
     .done(function( data ) {
       var yCounts = data.users.map(function(item){
-        return item.counts.media;
+        return item.counts.followed_by;
       });
       
-      yCounts.unshift('Posts');
+      yCounts.unshift('Their Followers');
 
       var chart = c3.generate({
         bindto: '#chart',
@@ -14,6 +14,20 @@
             yCounts 
           ],
           type: 'bar'
+        },
+        axis: {
+          x: {
+            label: {
+                text: 'People You Follow',
+                position: 'outer-center'
+                // inner-right : default
+                // inner-center
+                // inner-left
+                // outer-right
+                // outer-center
+                // outer-left
+            }
+          }
         }
       });
     });

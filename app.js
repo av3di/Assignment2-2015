@@ -316,7 +316,7 @@ app.get('/facefeed', function(req, res){
       Facebook.get("/me/likes" , function(err, response) 
       {
 
-        console.log("Response " + response.data[0].name);
+       // console.log("Response " + response.data[0].name);
         var infoarr = response.data.map(function(item)
         {
           var tempJSON = {};

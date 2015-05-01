@@ -62,7 +62,7 @@ svg.call(tip);
     .attr("y", 6)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
-    .text("Number of Photos");
+    .text("Number of Likes");
 
   //set up bars in bar graph
   svg.selectAll(".bar")
