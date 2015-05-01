@@ -206,6 +206,10 @@ app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', {user: req.user});
 });
 
+app.get('/account_f', ensureAuthenticated, function(req, res){
+  res.render('account_f', {user: req.user});
+});
+
 app.get('/igphotos', ensureAuthenticatedInstagram, function(req, res){
   var query  = models.User.where({ ig_id: req.user.ig_id });
   query.findOne(function (err, user) {
@@ -317,6 +321,7 @@ app.get('/facefeed', function(req, res){
         {
           var tempJSON = {};
           tempJSON.name = item.name;
+          tempJSON.category = item.category;
           return tempJSON;
         });
         
@@ -324,7 +329,8 @@ app.get('/facefeed', function(req, res){
         {
           console.log("hello");
         }
-        res.render('facefeed', {likes: infoarr});
+        //res.render('facefeed', {likes: infoarr});
+        return res.json({ likes: infoarr });
       }); 
     }
   });
@@ -332,6 +338,10 @@ app.get('/facefeed', function(req, res){
 
 app.get('/visualization', ensureAuthenticatedInstagram, function (req, res){
   res.render('visualization');
+}); 
+
+app.get('/visualization_f', ensureAuthenticatedInstagram, function (req, res){
+  res.render('visualization_f');
 }); 
 
 
@@ -367,7 +377,7 @@ app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res)
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { failureRedirect: '/login' }), 
   function(req, res) {
-    res.redirect('/account');
+    res.redirect('/account_f');
   });
 
 app.get('/logout', function(req, res){
