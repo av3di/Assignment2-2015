@@ -1,3 +1,19 @@
+
+<nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a id="ig_link" href="#">Instagram Visualizations</a>
+          <ul id="ig_menu">
+            <li><a href="/account">Basic Account Info</a></li>
+            <li><a href="/c3visualization">C3 Visualization</a></li>
+            <li><a href="/visualization">D3 Visualization</a></li>
+          </ul>
+        </li>
+        <li><a href="/logout">Log Out</a></li>
+      </ul>
+    </nav>
+    <br><br>
+
 <div class="pen-container">
 	<article>
 	
@@ -10,7 +26,17 @@
 	<br/>
 	<a href="/visualization">view D3 visualization</a>
 	<h1></h1>
-    	<p>Click to display graph!</p>
+    	<p>Click to link above to display graph!</p>
  	</article>
 </div>
+
+<script>
+    $("#ig_link").on("mouseover", function()
+    {
+      if($("#ig_menu").css("display") == "none" )
+        $("#ig_menu").css("display", "block");
+      else
+        $("#ig_menu").css("display", "none");
+    });
+</script>
 

@@ -1,3 +1,18 @@
+<nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a id="ig_link" href="#">Instagram Visualizations</a>
+          <ul id="ig_menu">
+            <li><a href="/account">Basic Account Info</a></li>
+            <li><a href="/c3visualization">C3 Visualization</a></li>
+            <li><a href="/visualization">D3 Visualization</a></li>
+          </ul>
+        </li>
+        <li><a href="/logout">Log Out</a></li>
+      </ul>
+    </nav>
+    <br><br>
+
 
 <h1>Are You Following the Popular Kids?</h1>
 <h2 style="text-align:center;">Number of Followers of Who You Follow On Instagram using C3JS </h2>
@@ -26,6 +41,16 @@ function show(id, value) {
 onReady(function () { 
     show('chart', true);
     show('loading', false);
-});</script>
+});
+
+
+    $("#ig_link").on("mouseover", function()
+    {
+      if($("#ig_menu").css("display") == "none" )
+        $("#ig_menu").css("display", "block");
+      else
+        $("#ig_menu").css("display", "none");
+    });
+</script>
 
 <script src="js/c3visualization.js"></script>

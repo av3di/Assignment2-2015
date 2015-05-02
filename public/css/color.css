@@ -97,8 +97,8 @@
 .pen-container {
   position: relative;
   max-width: 680px;
-  margin: 0 auto;
-  padding: 50px 30px;
+  margin: 50px auto;
+  padding: 0px 30px;
   text-align: center;
   background-color: white;
   
@@ -340,8 +340,60 @@ article:hover a {
     z-index: 100;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(192, 192, 192, 0.5);
-    background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+    background-color: rgba(white);
+    background-image: url("http://www.latinradios.com/css/images/loader.gif");
     background-repeat: no-repeat;
     background-position: center;
+}
+
+nav
+{
+  float: right;
+  margin-top: 25px;
+}
+nav ul
+{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li
+{
+  display: inline;
+  padding: 10px;
+}
+
+nav ul#ig_menu
+{
+  display: none;
+  position: absolute;
+  background-color: #656D78;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 7px;
+  margin-left: 72px;
+  z-index: 5;
+}
+nav ul#fb_menu
+{ 
+  display: none;
+  position: absolute;
+  background-color: #656D78;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 7px;
+  margin-left: 68px;
+  z-index: 5;
+}
+nav ul li ul li
+{
+  display: block;
+}
+nav ul li#ig_link
+{
+  position: relative;
+}
+nav ul li#fb_link
+{
+  position: relative;
 }

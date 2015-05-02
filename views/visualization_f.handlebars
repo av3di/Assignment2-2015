@@ -1,3 +1,17 @@
+<nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a id="fb_link"href="#">Facebook Visualizations</a>
+          <ul id="fb_menu">
+            <li><a href="/account_f">Basic Account Info</a></li>
+            <li><a href="/visualization_f">D3 Visualization</a></li>
+          </ul>
+        </li>
+        <li><a href="/logout">Log Out</a></li>
+      </ul>
+    </nav>
+    <br><br>
+
 <h1>Are Your Posts Liked on Facebook?</h1>
 <div id="chart"></div>
 
@@ -22,7 +36,16 @@ function show(id, value) {
 onReady(function () { 
     show('chart', true);
     show('loading', false);
-});</script>
+});
+
+    $("#fb_link").on("mouseover", function()
+    {
+      if($("#fb_menu").css("display") == "none" )
+        $("#fb_menu").css("display", "block");
+      else
+        $("#fb_menu").css("display", "none");
+    });
+</script>
 
 <label style="width:100%; padding: 20px; text-align: center; font-weight:bold; font-size: 24px; color:#4682B4;"><input type="checkbox">Sort By Number of Likes</label>
   <script src="d3-tip-master/index.js"></script>

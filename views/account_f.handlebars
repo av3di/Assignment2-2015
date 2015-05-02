@@ -1,3 +1,17 @@
+<nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a id="fb_link"href="#">Facebook Visualizations</a>
+          <ul id="fb_menu">
+            <li><a href="/account_f">Basic Account Info</a></li>
+            <li><a href="/visualization_f">D3 Visualization</a></li>
+          </ul>
+        </li>
+        <li><a href="/logout">Log Out</a></li>
+      </ul>
+    </nav>
+    <br><br>
+
 <div class="pen-container">
 	<article>
 	
@@ -8,6 +22,17 @@
 	<br>
 	<a href="/visualization_f">view D3 visualization</a>
 	<h1></h1>
-    	<p>Click to display graph!</p>
+    	<p>Click the link above to display the graph!</p>
  	</article>
 </div>
+
+<script>
+  $("#fb_link").on("mouseover", function()
+    {
+      $("#ig_menu").css("display", "none");
+      if($("#fb_menu").css("display") == "none" )
+        $("#fb_menu").css("display", "block");
+      else
+        $("#fb_menu").css("display", "none");
+    });
+</script>
